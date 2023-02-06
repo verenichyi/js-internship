@@ -23,7 +23,7 @@
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
 function findElement(arr, value) {
-	return arr.indexOf(value)
+	return arr.indexOf(value);
 }
 
 /**
@@ -38,9 +38,18 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-	throw new Error('Not implemented');
+	let previous = 1;
+	const arr = [];
+
+	for (let i = 1; i <= len; i++) {
+		arr.push(previous);
+		previous += 2;
+	}
+
+	return arr;
 }
 
+console.log(generateOdds(5));
 
 /**
  * Returns the doubled array - elements of the specified array are repeated twice using original order
