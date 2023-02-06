@@ -49,8 +49,6 @@ function generateOdds(len) {
 	return arr;
 }
 
-console.log(generateOdds(5));
-
 /**
  * Returns the doubled array - elements of the specified array are repeated twice using original order
  *
@@ -63,7 +61,7 @@ console.log(generateOdds(5));
  *    [] => []
  */
 function doubleArray(arr) {
-	throw new Error('Not implemented');
+	return [ ...arr, ...arr ];
 }
 
 
