@@ -203,7 +203,24 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-	throw new Error('Not implemented');
+	let stringRectangle = "";
+	const widthWithNoAnglesCharsAmount = width - 2;
+	const widthSideWithNoAngles = "─".repeat(widthWithNoAnglesCharsAmount);
+	const upSide = `┌${widthSideWithNoAngles}┐\n`;
+	const midChunk = `│${" ".repeat(widthWithNoAnglesCharsAmount)}│\n`;
+	const downSide = `└${widthSideWithNoAngles}┘\n`;
+
+	for (let i = 1; i <= height; i++) {
+		if (i === 1) {
+			stringRectangle += upSide;
+		} else if (i === height) {
+			stringRectangle += downSide;
+		} else {
+			stringRectangle += midChunk;
+		}
+	}
+
+	return stringRectangle;
 }
 
 
