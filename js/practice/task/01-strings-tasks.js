@@ -240,7 +240,20 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-	throw new Error('Not implemented');
+	const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	const cipherAlphabet = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+
+	return str
+		.split("")
+		.map((char) => {
+			if (!alphabet.includes(char)) {
+				return char;
+			}
+
+			const charIdx = alphabet.indexOf(char);
+			return cipherAlphabet[charIdx];
+		})
+		.join("");
 }
 
 /**
