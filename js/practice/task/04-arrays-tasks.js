@@ -182,7 +182,7 @@ function getHead(arr, n) {
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'b', 'c', 'd' ]
  */
 function getTail(arr, n) {
-	throw new Error('Not implemented');
+	return arr.slice(-n);
 }
 
 
