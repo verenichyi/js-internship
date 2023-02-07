@@ -109,7 +109,7 @@ function getArrayOfStrings(arr) {
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
 function removeFalsyValues(arr) {
-	throw new Error('Not implemented');
+	return arr.filter((item) => !!item);
 }
 
 /**
