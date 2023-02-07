@@ -433,7 +433,7 @@ function findAllOccurences(arr, item) {
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
 function toStringList(arr) {
-	return arr.join(',')
+	return arr.join(',');
 }
 
 
@@ -462,7 +462,17 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  */
 function sortCitiesArray(arr) {
-	throw new Error('Not implemented');
+	const compareKeys = [ 'country', 'city' ];
+
+	const getCompareValue = (obj) => {
+		return compareKeys.map((key) => obj[key]).join('');
+	};
+
+	const citiesComparer = (a, b) => {
+		return getCompareValue(a).localeCompare(getCompareValue(b));
+	};
+
+	return arr.sort(citiesComparer);
 }
 
 /**
@@ -545,7 +555,7 @@ function distinct(arr) {
  *            =>
  *   Map {
  *    "Belarus" => ["Brest", "Grodno", "Minsk"],
- *    "Russia" => ["Omsk", "Samara"], 
+ *    "Russia" => ["Omsk", "Samara"],
  *    "Poland" => ['Lodz']
  *   }
  */
