@@ -38,15 +38,11 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-	let previous = 1;
-	const arr = [];
+	return Array.from({ length: len }).reduce((acc, _, index) => {
+		acc.push(index * 2 + 1);
 
-	for (let i = 1; i <= len; i++) {
-		arr.push(previous);
-		previous += 2;
-	}
-
-	return arr;
+		return acc;
+	}, []);
 }
 
 /**
@@ -494,7 +490,11 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-	throw new Error('Not implemented');
+	return Array.from({ length: n }, (x, i) => {
+		const arr = Array(n).fill(0);
+		arr[i] = 1;
+		return arr;
+	});
 }
 
 /**
@@ -511,13 +511,8 @@ function getIdentityMatrix(n) {
  *     3, 3   => [ 3 ]
  */
 function getIntervalArray(start, end) {
-	const arr = [];
-
-	for (let i = start; i <= end; i++) {
-		arr.push(i);
-	}
-
-	return arr;
+	const len = Math.abs(start - end) + 1;
+	return Array.from({ length: len }, () => start++);
 }
 
 /**
@@ -607,13 +602,7 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-	let result = arr;
-
-	indexes.forEach((index) => {
-		result = result[index];
-	});
-
-	return result;
+	return indexes.reduce((acc, curr) => acc[curr], arr);
 }
 
 
