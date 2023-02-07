@@ -636,7 +636,8 @@ function getElementByIndexes(arr, indexes) {
  *
  */
 function swapHeadAndTail(arr) {
-	throw new Error('Not implemented');
+	const mid = Math.ceil(arr.length / 2);
+	return arr.map((x, i) => (i < mid) ? arr[mid + i] || x : arr[i - mid]);
 }
 
 
