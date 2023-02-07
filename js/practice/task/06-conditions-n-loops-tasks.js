@@ -230,7 +230,11 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-	throw new Error('Not implemented');
+	const start = isStartIncluded ? '[' : '(';
+	const end = isEndIncluded ? ']' : ')';
+	const max = Math.max(a, b);
+	const min = Math.min(a, b);
+	return `${start}${min}, ${max}${end}`;
 }
 
 
