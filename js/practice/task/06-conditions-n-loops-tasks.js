@@ -591,7 +591,31 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-	throw new Error('Not implemented');
+	const squares = position.map((item) => {
+		const res = [];
+		item[0] ? res.push(item[0]) : res.push(null);
+		item[1] ? res.push(item[1]) : res.push(null);
+		item[2] ? res.push(item[2]) : res.push(null);
+		return res;
+	}).flat(1);
+
+	const lines = [
+		[ 0, 1, 2 ],
+		[ 3, 4, 5 ],
+		[ 6, 7, 8 ],
+		[ 0, 3, 6 ],
+		[ 1, 4, 7 ],
+		[ 2, 5, 8 ],
+		[ 0, 4, 8 ],
+		[ 2, 4, 6 ]
+	];
+	for (let i = 0; i < lines.length; i++) {
+		const [ a, b, c ] = lines[i];
+		if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+			return squares[a];
+		}
+	}
+	return undefined;
 }
 
 
