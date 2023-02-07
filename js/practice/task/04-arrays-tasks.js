@@ -566,7 +566,15 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-	throw new Error('Not implemented');
+	const map = array.reduce((acc, item) => {
+		const field = acc[keySelector(item)];
+		const value = valueSelector(item);
+		acc[keySelector(item)] = field ? [ ...field, value ] : [ value ];
+
+		return acc;
+	}, {});
+
+	return new Map(Object.entries(map));
 }
 
 
