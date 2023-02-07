@@ -434,24 +434,44 @@ function isBracketsBalanced(str) {
 function timespanToHumanString(startDate, endDate) {
 	const second = 1000;
 	const minute = 60 * second;
-	const hour   = 60 * minute;
-	const day    = 24 * hour;
-	const month  = 30 * day;
-	const year   = 12 * month;
-	const round  = (ts, units) => Math.round((ts - 1) / units);
+	const hour = 60 * minute;
+	const day = 24 * hour;
+	const month = 30 * day;
+	const year = 12 * month;
+	const round = (ts, units) => Math.round((ts - 1) / units);
 
 	const timespan = Math.abs(startDate.getTime() - endDate.getTime());
 
-	if (timespan <= 45  * second) { return 'a few seconds ago';                      }
-	if (timespan <= 90  * second) { return 'a minute ago';                           }
-	if (timespan <= 45  * minute) { return `${round(timespan, minute)} minutes ago`; }
-	if (timespan <= 90  * minute) { return 'an hour ago';                            }
-	if (timespan <= 22  * hour  ) { return `${round(timespan, hour)} hours ago`;     }
-	if (timespan <= 36  * hour  ) { return 'a day ago';                              }
-	if (timespan <= 25  * day   ) { return `${round(timespan, day)} days ago`;       }
-	if (timespan <= 45  * day   ) { return 'a month ago';                            }
-	if (timespan <= 345 * day   ) { return `${round(timespan, month)} months ago`;   }
-	if (timespan <= 545 * day   ) { return 'a year ago';                             }
+	if (timespan <= 45 * second) {
+		return 'a few seconds ago';
+	}
+	if (timespan <= 90 * second) {
+		return 'a minute ago';
+	}
+	if (timespan <= 45 * minute) {
+		return `${round(timespan, minute)} minutes ago`;
+	}
+	if (timespan <= 90 * minute) {
+		return 'an hour ago';
+	}
+	if (timespan <= 22 * hour) {
+		return `${round(timespan, hour)} hours ago`;
+	}
+	if (timespan <= 36 * hour) {
+		return 'a day ago';
+	}
+	if (timespan <= 25 * day) {
+		return `${round(timespan, day)} days ago`;
+	}
+	if (timespan <= 45 * day) {
+		return 'a month ago';
+	}
+	if (timespan <= 345 * day) {
+		return `${round(timespan, month)} months ago`;
+	}
+	if (timespan <= 545 * day) {
+		return 'a year ago';
+	}
 	return `${round(timespan, year)} years ago`;
 }
 
@@ -476,7 +496,12 @@ function timespanToHumanString(startDate, endDate) {
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-	throw new Error('Not implemented');
+	let res = '';
+	while (num !== 0) {
+		res = num % n + res;
+		num = Math.trunc(num / n);
+	}
+	return res;
 }
 
 
@@ -493,7 +518,12 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-	throw new Error('Not implemented');
+	const dirs = pathes.map((path) => path.split('/'));
+	const index = dirs[0].findIndex((x, i) => {
+		return dirs.some((dir) => x !== dir[i]);
+	});
+
+	return index === 0 ? '' : `${dirs[0].slice(0, index).join('/')}/`;
 }
 
 
@@ -516,7 +546,17 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-	throw new Error('Not implemented');
+	const res = [];
+	for (let i = 0; i < m1.length; ++i) {
+		res[i] = [];
+		for (let j = 0; j < m1.length; ++j) {
+			res[i][j] = 0;
+			for (let k = 0; k < m2.length; ++k) {
+				res[i][j] += m1[i][k] * m2[k][j];
+			}
+		}
+	}
+	return res;
 }
 
 
