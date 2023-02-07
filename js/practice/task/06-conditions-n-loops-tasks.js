@@ -202,7 +202,7 @@ function findFirstSingleChar(str) {
 		acc[cur] = (acc[cur] || 0) + 1;
 
 		return acc;
-	}, {})
+	}, {});
 
 	return arr.find(i => map[i] === 1) || null;
 }
@@ -251,7 +251,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-	throw new Error('Not implemented');
+	return str.split('').reverse().join('');
 }
 
 
