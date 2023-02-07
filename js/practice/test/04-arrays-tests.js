@@ -780,7 +780,7 @@ describe('04-arrays-tasks', function() {
                 childrenSelector : x => x,
                 expected: [ 1, 2, 3, 4, 5, 6 ]
             }, {
-                arr:      [[11, 12, 13, 14, 15], [21, 22, ,23, 24, 25], [31, 32, 34, 35]],
+                arr:      [[11, 12, 13, 14, 15], [21, 22, 23, 24, 25], [31, 32, 34, 35]],
                 childrenSelector : x => x.slice(0,2),
                 expected: [ 11, 12, 21, 22, 31, 32 ]
             }, {
