@@ -174,16 +174,6 @@ function* breadthTraversalTree(root) {
 		}
 	}
 }
-// var node1 = { n:1 }, node2 = { n:2 }, node3 = { n:3 }, node4 = { n:4 }, node5 = { n:5 }, node6 = { n:6 }, node7 = { n:7 }, node8 = { n:8 };
-// node1.children = [ node2, node3, node4 ];
-// node2.children = [ node5, node6 ];
-// node4.children = [ node7 ];
-// node6.children = [ node8 ];
-// const generator = breadthTraversalTree(node1)
-//
-// for (const object of generator) {
-// 	console.log(object.n);
-// }
 
 /**
  * Merges two yield-style sorted sequences into the one sorted sequence.
