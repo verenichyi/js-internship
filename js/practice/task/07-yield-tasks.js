@@ -115,11 +115,11 @@ function* depthTraversalTree(root) {
 	stack.push(root);
 
 	while (stack.length) {
-		let cur = stack.pop();
-		yield cur;
+		const node = stack.pop();
+		yield node;
 
-		if (cur.children) {
-			cur.children.reverse().forEach((x) => {
+		if (node.children) {
+			node.children.reverse().forEach((x) => {
 					if (!visited.has(x)) {
 						visited.add(x);
 						stack.push(x);
@@ -153,9 +153,37 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
+	const visited = new Set();
+	const queue = [];
 
+	visited.add(root);
+	queue.push(root);
+
+	while (queue.length) {
+		const node = queue.shift();
+		yield node;
+
+		if (node.children) {
+			node.children.forEach((x) => {
+					if (!visited.has(x)) {
+						visited.add(x);
+						queue.push(x);
+					}
+				}
+			);
+		}
+	}
 }
-
+// var node1 = { n:1 }, node2 = { n:2 }, node3 = { n:3 }, node4 = { n:4 }, node5 = { n:5 }, node6 = { n:6 }, node7 = { n:7 }, node8 = { n:8 };
+// node1.children = [ node2, node3, node4 ];
+// node2.children = [ node5, node6 ];
+// node4.children = [ node7 ];
+// node6.children = [ node8 ];
+// const generator = breadthTraversalTree(node1)
+//
+// for (const object of generator) {
+// 	console.log(object.n);
+// }
 
 /**
  * Merges two yield-style sorted sequences into the one sorted sequence.
