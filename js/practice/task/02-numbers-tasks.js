@@ -239,9 +239,9 @@ function toNumber(value, def) {
 	const toNum = Number(value);
 	if (typeof toNum === 'number' && !isNaN(toNum) || value instanceof Number) {
 		return toNum;
-	} else {
-		return def;
 	}
+
+	return def;
 }
 
 module.exports = {
