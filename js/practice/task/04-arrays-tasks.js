@@ -625,13 +625,13 @@ function getElementByIndexes(arr, indexes) {
  *
  */
 function swapHeadAndTail(arr) {
-	const isArrLengthEven = arr.length % 2 === 0;
-	const mid = Math.ceil(arr.length / 2);
+	const mid = Math.trunc(arr.length / 2);
 
-	const head = isArrLengthEven ? arr.slice(0, mid) : arr.slice(0, mid - 1);
-	const tail = arr.slice(mid);
-
-	return isArrLengthEven ? [ ...tail, ...head ] : [ ...tail, arr[mid - 1], ...head ];
+	return [
+		...arr.slice(-mid),
+		...arr.slice(mid, -mid),
+		...arr.slice(0, mid)
+	];
 }
 
 
