@@ -129,7 +129,7 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-	return str.replace(value, "");
+	return str.replace(value, '');
 }
 
 /**
@@ -145,9 +145,9 @@ function removeFirstOccurrences(str, value) {
  */
 function unbracketTag(str) {
 	return str
-		.split("")
-		.filter((char) => char !== "<" && char !== ">")
-		.join("");
+		.split('')
+		.filter((char) => char !== '<' && char !== '>')
+		.join('');
 }
 
 
@@ -176,7 +176,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-	return str.split(";");
+	return str.split(';');
 }
 
 /**
@@ -203,20 +203,23 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-	let stringRectangle = "";
+	let stringRectangle = '';
 	const widthWithNoAnglesCharsAmount = width - 2;
-	const widthSideWithNoAngles = "─".repeat(widthWithNoAnglesCharsAmount);
+	const widthSideWithNoAngles = '─'.repeat(widthWithNoAnglesCharsAmount);
 	const upSide = `┌${widthSideWithNoAngles}┐\n`;
-	const midChunk = `│${" ".repeat(widthWithNoAnglesCharsAmount)}│\n`;
+	const midChunk = `│${' '.repeat(widthWithNoAnglesCharsAmount)}│\n`;
 	const downSide = `└${widthSideWithNoAngles}┘\n`;
 
 	for (let i = 1; i <= height; i++) {
-		if (i === 1) {
-			stringRectangle += upSide;
-		} else if (i === height) {
-			stringRectangle += downSide;
-		} else {
-			stringRectangle += midChunk;
+		switch (i) {
+			case 1:
+				stringRectangle += upSide;
+				break;
+			case height:
+				stringRectangle += downSide;
+				break;
+			default:
+				stringRectangle += midChunk;
 		}
 	}
 
@@ -240,11 +243,11 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-	const alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	const cipherAlphabet = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
+	const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	const cipherAlphabet = 'nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM';
 
 	return str
-		.split("")
+		.split('')
 		.map((char) => {
 			if (!alphabet.includes(char)) {
 				return char;
@@ -253,7 +256,7 @@ function encodeToRot13(str) {
 			const charIdx = alphabet.indexOf(char);
 			return cipherAlphabet[charIdx];
 		})
-		.join("");
+		.join('');
 }
 
 /**
@@ -270,7 +273,7 @@ function encodeToRot13(str) {
  *   isString(new String('test')) => true
  */
 function isString(value) {
-	return typeof value === "string" || value instanceof String;
+	return typeof value === 'string' || value instanceof String;
 }
 
 
@@ -300,58 +303,58 @@ function isString(value) {
  */
 function getCardId(value) {
 	const cardsDeck = [
-		"A♣",
-		"2♣",
-		"3♣",
-		"4♣",
-		"5♣",
-		"6♣",
-		"7♣",
-		"8♣",
-		"9♣",
-		"10♣",
-		"J♣",
-		"Q♣",
-		"K♣",
-		"A♦",
-		"2♦",
-		"3♦",
-		"4♦",
-		"5♦",
-		"6♦",
-		"7♦",
-		"8♦",
-		"9♦",
-		"10♦",
-		"J♦",
-		"Q♦",
-		"K♦",
-		"A♥",
-		"2♥",
-		"3♥",
-		"4♥",
-		"5♥",
-		"6♥",
-		"7♥",
-		"8♥",
-		"9♥",
-		"10♥",
-		"J♥",
-		"Q♥",
-		"K♥",
-		"A♠",
-		"2♠",
-		"3♠",
-		"4♠",
-		"5♠",
-		"6♠",
-		"7♠",
-		"8♠",
-		"9♠",
-		"10♠",
-		"J♠",
-		"Q♠",
-		"K♠",
+		'A♣',
+		'2♣',
+		'3♣',
+		'4♣',
+		'5♣',
+		'6♣',
+		'7♣',
+		'8♣',
+		'9♣',
+		'10♣',
+		'J♣',
+		'Q♣',
+		'K♣',
+		'A♦',
+		'2♦',
+		'3♦',
+		'4♦',
+		'5♦',
+		'6♦',
+		'7♦',
+		'8♦',
+		'9♦',
+		'10♦',
+		'J♦',
+		'Q♦',
+		'K♦',
+		'A♥',
+		'2♥',
+		'3♥',
+		'4♥',
+		'5♥',
+		'6♥',
+		'7♥',
+		'8♥',
+		'9♥',
+		'10♥',
+		'J♥',
+		'Q♥',
+		'K♥',
+		'A♠',
+		'2♠',
+		'3♠',
+		'4♠',
+		'5♠',
+		'6♠',
+		'7♠',
+		'8♠',
+		'9♠',
+		'10♠',
+		'J♠',
+		'Q♠',
+		'K♠',
 	];
 
 	return cardsDeck.indexOf(value);
