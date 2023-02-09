@@ -302,60 +302,17 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-	const cardsDeck = [
-		'A♣',
-		'2♣',
-		'3♣',
-		'4♣',
-		'5♣',
-		'6♣',
-		'7♣',
-		'8♣',
-		'9♣',
-		'10♣',
-		'J♣',
-		'Q♣',
-		'K♣',
-		'A♦',
-		'2♦',
-		'3♦',
-		'4♦',
-		'5♦',
-		'6♦',
-		'7♦',
-		'8♦',
-		'9♦',
-		'10♦',
-		'J♦',
-		'Q♦',
-		'K♦',
-		'A♥',
-		'2♥',
-		'3♥',
-		'4♥',
-		'5♥',
-		'6♥',
-		'7♥',
-		'8♥',
-		'9♥',
-		'10♥',
-		'J♥',
-		'Q♥',
-		'K♥',
-		'A♠',
-		'2♠',
-		'3♠',
-		'4♠',
-		'5♠',
-		'6♠',
-		'7♠',
-		'8♠',
-		'9♠',
-		'10♠',
-		'J♠',
-		'Q♠',
-		'K♠',
-	];
+	const cardsSequence = [ 'A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K' ];
+	const cardsSuits = [ '♣', '♦', '♥', '♠' ];
+
+	const cardsDeck = cardsSuits.reduce((acc, curr) => {
+		for (let i = 0; i < cardsSequence.length; i++) {
+			const card = `${cardsSequence[i]}${curr}`;
+			acc.push(card);
+		}
+
+		return acc;
+	}, []);
 
 	return cardsDeck.indexOf(value);
 }
