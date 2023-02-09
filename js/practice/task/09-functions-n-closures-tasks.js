@@ -91,7 +91,7 @@ function memoize(func) {
 			func = null;
 		}
 		return cache;
-	}
+	};
 }
 
 
@@ -111,7 +111,19 @@ function memoize(func) {
  * retryer() => 2
  */
 function retry(func, attempts) {
-	throw new Error('Not implemented');
+	return () => {
+		let error;
+
+		for (let retries = 0; retries < attempts; retries++) {
+			try {
+				return func();
+			} catch (err) {
+				error = err;
+			}
+		}
+
+		throw error;
+	};
 }
 
 
