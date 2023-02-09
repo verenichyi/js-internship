@@ -352,7 +352,7 @@ function sortDigitNamesByNumericOrder(arr) {
 		nine: 9,
 	};
 
-	return arr.sort((a, b) => map[a] - map[b]);
+	return arr.sort((a, b) => map[a.toLowerCase()] - map[b.toLowerCase()]);
 }
 
 /**
