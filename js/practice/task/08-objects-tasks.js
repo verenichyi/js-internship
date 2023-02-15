@@ -23,8 +23,13 @@
  *    console.log(r.getArea());   // => 200
  */
 function Rectangle(width, height) {
-    throw new Error('Not implemented');
+	this.width = width;
+	this.height = height;
 }
+
+Rectangle.prototype.getArea = function () {
+	return this.width * this.height;
+};
 
 
 /**
@@ -38,7 +43,7 @@ function Rectangle(width, height) {
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
 function getJSON(obj) {
-    throw new Error('Not implemented');
+	return JSON.stringify(obj);
 }
 
 
@@ -54,7 +59,7 @@ function getJSON(obj) {
  *
  */
 function fromJSON(proto, json) {
-    throw new Error('Not implemented');
+	return Object.setPrototypeOf(JSON.parse(json), proto);
 }
 
 
@@ -106,41 +111,113 @@ function fromJSON(proto, json) {
  *  For more examples see unit tests.
  */
 
+const SelectorOrder = {
+	ELEMENT: 0,
+	ID: 1,
+	CLASS: 2,
+	ATTR: 3,
+	PSEUDO_CLASS: 4,
+	PSEUDO_ELEMENT: 5,
+	COMBINED_SELECTOR: 6
+};
+
+class CssSelector {
+	constructor(selector = '', state = SelectorOrder.Element) {
+		this.selector = selector;
+		this.extraPartsErrorMsg = 'Element, id and pseudo-element should not occur more then one time inside the selector';
+		this.invalidOrderErrorMsg = 'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element';
+		this.currentOrder = state;
+		this.alreadyCalled = {};
+	}
+
+	addSelectorPart(value, order, isOneTime) {
+		if (this.alreadyCalled[order]) {
+			throw new Error(this.extraPartsErrorMsg);
+		}
+
+		if (isOneTime) {
+			this.alreadyCalled[order] = true;
+		}
+
+		if (this.currentOrder > order) {
+			throw new Error(this.invalidOrderErrorMsg);
+		}
+
+		this.currentOrder = order;
+		this.selector += value;
+
+		return this;
+	}
+
+	element(value) {
+		return this.addSelectorPart(value, SelectorOrder.ELEMENT, true);
+	}
+
+	id(value) {
+		return this.addSelectorPart(`#${value}`, SelectorOrder.ID, true);
+	}
+
+	class(value) {
+		return this.addSelectorPart(`.${value}`, SelectorOrder.CLASS);
+	}
+
+	attr(value) {
+		return this.addSelectorPart(`[${value}]`, SelectorOrder.ATTR);
+	}
+
+	pseudoClass(value) {
+		return this.addSelectorPart(`:${value}`, SelectorOrder.PSEUDO_CLASS);
+	}
+
+	pseudoElement(value) {
+		return this.addSelectorPart(`::${value}`, SelectorOrder.PSEUDO_ELEMENT, true);
+	}
+
+	combine(selector2, combinator) {
+		const combinedSelector = `${this.selector} ${combinator} ${selector2.selector}`;
+		return new CssSelector(combinedSelector, SelectorOrder.COMBINED_SELECTOR);
+	}
+
+	stringify() {
+		return this.selector;
+	}
+}
+
 const cssSelectorBuilder = {
 
-    element: function(value) {
-        throw new Error('Not implemented');
-    },
+	element: function (value) {
+		return new CssSelector().element(value);
+	},
 
-    id: function(value) {
-        throw new Error('Not implemented');
-    },
+	id: function (value) {
+		return new CssSelector().id(value);
+	},
 
-    class: function(value) {
-        throw new Error('Not implemented');
-    },
+	class: function (value) {
+		return new CssSelector().class(value);
+	},
 
-    attr: function(value) {
-        throw new Error('Not implemented');
-    },
+	attr: function (value) {
+		return new CssSelector().attr(value);
+	},
 
-    pseudoClass: function(value) {
-        throw new Error('Not implemented');
-    },
+	pseudoClass: function (value) {
+		return new CssSelector().pseudoClass(value);
+	},
 
-    pseudoElement: function(value) {
-        throw new Error('Not implemented');
-    },
+	pseudoElement: function (value) {
+		return new CssSelector().pseudoElement(value);
+	},
 
-    combine: function(selector1, combinator, selector2) {
-        throw new Error('Not implemented');
-    },
+	combine: function (selector1, combinator, selector2) {
+		return selector1.combine(selector2, combinator);
+	},
 };
 
 
 module.exports = {
-    Rectangle: Rectangle,
-    getJSON: getJSON,
-    fromJSON: fromJSON,
-    cssSelectorBuilder: cssSelectorBuilder
+	Rectangle: Rectangle,
+	getJSON: getJSON,
+	fromJSON: fromJSON,
+	cssSelectorBuilder: cssSelectorBuilder
 };
